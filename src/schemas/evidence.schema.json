@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zakshub.github.io/wise/schemas/evidence.schema.json",
+  "title": "Evidence",
+  "allOf": [
+    { "$ref": "common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "evidence" },
+        "source_id": { "type": "string", "minLength": 1 },
+        "observation_text": { "type": "string", "minLength": 1 },
+        "interpretation": { "type": ["string", "null"] },
+        "method": { "type": "string", "enum": ["direct_quote", "paraphrase", "inference", "statistical_extract", "other"] },
+        "scope": { "type": "string", "enum": ["individual_experience", "team_pattern", "organization_wide", "industry_wide", "geographic_region"] },
+        "evidence_level": { "type": "string", "enum": ["A", "B", "C", "D"] },
+        "limitations": { "type": ["string", "null"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "supporting_evidence_ids": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "counterevidence_ids": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "alternative_explanation_ids": { "type": "array", "items": { "type": "string" }, "default": [] }
+      },
+      "required": ["source_id", "observation_text", "method", "scope", "evidence_level", "confidence"],
+      "additionalProperties": false
+    }
+  ]
+}

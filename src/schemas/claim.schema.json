@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zakshub.github.io/wise/schemas/claim.schema.json",
+  "title": "Claim",
+  "allOf": [
+    { "$ref": "common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "claim" },
+        "evidence_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "claim_text": { "type": "string", "minLength": 1 },
+        "claim_type": { "type": "string", "enum": ["factual_statement", "reported_allegation", "corroborated_pattern", "analytical_interpretation", "hypothesis", "model_suggestion", "owner_approved_conclusion"] },
+        "geographic_scope": { "type": ["string", "null"] },
+        "industry_scope": { "type": ["string", "null"] },
+        "employer_scope": { "type": ["string", "null"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "uncertainty_notes": { "type": ["string", "null"] },
+        "reviewer_decision": { "type": ["string", "null"], "enum": ["accepted", "rejected", "needs_more_evidence", "flagged_for_review"] },
+        "review_reason": { "type": ["string", "null"] }
+      },
+      "required": ["evidence_ids", "claim_text", "claim_type", "confidence"],
+      "additionalProperties": false
+    }
+  ]
+}

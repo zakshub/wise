@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zakshub.github.io/wise/schemas/topic.schema.json",
+  "title": "Topic",
+  "allOf": [
+    { "$ref": "common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "topic" },
+        "claim_ids": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "source_ids": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "priority_rationale": { "type": ["string", "null"] },
+        "status": { "type": "string", "enum": ["active", "archived", "on_hold"] }
+      },
+      "required": ["status"],
+      "additionalProperties": false
+    }
+  ]
+}

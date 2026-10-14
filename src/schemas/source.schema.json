@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zakshub.github.io/wise/schemas/source.schema.json",
+  "title": "Source",
+  "allOf": [
+    { "$ref": "common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "source" },
+        "url": { "type": "string", "format": "uri" },
+        "source_type": { "type": "string", "enum": ["review_platform", "news", "government", "academic", "company_statement", "forum", "social_media", "other"] },
+        "publisher": { "type": ["string", "null"] },
+        "author": { "type": ["string", "null"] },
+        "published_at": { "type": ["string", "null"], "format": "date-time" },
+        "accessed_at": { "type": "string", "format": "date-time" },
+        "geographic_context": { "type": ["string", "null"] },
+        "industry_context": { "type": ["string", "null"] },
+        "employer_context": { "type": ["string", "null"] },
+        "availability_status": { "type": "string", "enum": ["accessible", "paywall", "login_required", "rate_limited", "blocked", "removed", "unknown"] },
+        "extraction_method": { "type": "string", "enum": ["manual", "api", "rss", "html_scrape", "other"] },
+        "reliability_notes": { "type": ["string", "null"] },
+        "limitations": { "type": ["string", "null"] },
+        "independence_group": { "type": ["string", "null"] }
+      },
+      "required": ["url", "source_type", "accessed_at", "availability_status", "extraction_method"],
+      "additionalProperties": false
+    }
+  ]
+}

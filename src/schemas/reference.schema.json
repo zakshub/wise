@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zakshub.github.io/wise/schemas/reference.schema.json",
+  "title": "Reference",
+  "allOf": [
+    { "$ref": "common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "reference" },
+        "source_id": { "type": "string", "minLength": 1 },
+        "mechanism": { "type": "string", "enum": ["citation", "corroboration", "counterevidence", "context", "methodology"] },
+        "use_context": { "type": "string" },
+        "originality_note": { "type": ["string", "null"] }
+      },
+      "required": ["source_id", "mechanism", "use_context"],
+      "additionalProperties": false
+    }
+  ]
+}

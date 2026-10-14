@@ -1,0 +1,12 @@
+node_modules
+dist
+data/*.sqlite3
+data/*.sqlite3-*
+storage
+.env
+.env.local
+*.log
+.DS_Store
+coverage
+.venv
+__pycache__

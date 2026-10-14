@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zakshub.github.io/wise/schemas/conflict.schema.json",
+  "title": "Conflict",
+  "allOf": [
+    { "$ref": "common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "conflict" },
+        "competing_claim_ids": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
+        "evidence_for_each": { "type": "object", "additionalProperties": { "type": "array", "items": { "type": "string" } } },
+        "state": { "type": "string", "enum": ["open", "resolved", "deferred"] },
+        "resolution": { "type": ["string", "null"] },
+        "resolved_by": { "type": ["string", "null"] },
+        "resolved_at": { "type": ["string", "null"], "format": "date-time" }
+      },
+      "required": ["competing_claim_ids", "evidence_for_each", "state"],
+      "additionalProperties": false
+    }
+  ]
+}

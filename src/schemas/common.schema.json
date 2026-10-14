@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zakshub.github.io/wise/schemas/common.schema.json",
+  "title": "Common Fields",
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "id": { "type": "string", "minLength": 1 },
+    "type": { "type": "string", "minLength": 1 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "created_by": { "type": "string", "minLength": 1 },
+    "fixture": { "type": "boolean", "default": false },
+    "lifecycle": { "type": "string", "enum": ["draft", "active", "superseded", "retired"] },
+    "review": {
+      "type": ["object", "null"],
+      "properties": {
+        "actor": { "type": "string" },
+        "actor_kind": { "type": "string", "enum": ["human", "fixture"] },
+        "decision": { "type": "string", "enum": ["approved", "rejected", "needs_revision"] },
+        "time": { "type": "string", "format": "date-time" },
+        "reason": { "type": "string" }
+      },
+      "required": ["actor", "actor_kind", "decision", "time", "reason"]
+    },
+    "review_due_at": { "type": ["string", "null"], "format": "date-time" },
+    "change_reason": { "type": "string" }
+  },
+  "required": ["schema_version", "id", "type", "revision", "title", "created_at", "updated_at", "created_by", "lifecycle"],
+  "additionalProperties": false
+}

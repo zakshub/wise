@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zakshub.github.io/wise/schemas/alternative_explanation.schema.json",
+  "title": "Alternative Explanation",
+  "allOf": [
+    { "$ref": "common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "alternative_explanation" },
+        "claim_id": { "type": "string", "minLength": 1 },
+        "explanation_text": { "type": "string", "minLength": 1 },
+        "plausibility": { "type": "string", "enum": ["high", "medium", "low", "speculative"] },
+        "supporting_evidence_ids": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "status": { "type": "string", "enum": ["active", "dismissed", "needs_investigation"] }
+      },
+      "required": ["claim_id", "explanation_text", "plausibility", "status"],
+      "additionalProperties": false
+    }
+  ]
+}

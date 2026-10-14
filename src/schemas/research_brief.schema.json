@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zakshub.github.io/wise/schemas/research_brief.schema.json",
+  "title": "Research Brief",
+  "allOf": [
+    { "$ref": "common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "research_brief" },
+        "topic_id": { "type": "string", "minLength": 1 },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "claim_id": { "type": "string" },
+              "summary": { "type": "string" },
+              "evidence_level": { "type": "string", "enum": ["A", "B", "C", "D"] }
+            },
+            "required": ["claim_id", "summary", "evidence_level"]
+          }
+        },
+        "uncertainties": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "gaps": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "claim_to_evidence_map": {
+          "type": "object",
+          "additionalProperties": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "required": ["topic_id", "findings", "uncertainties", "gaps", "claim_to_evidence_map"],
+      "additionalProperties": false
+    }
+  ]
+}

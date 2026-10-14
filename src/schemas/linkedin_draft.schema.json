@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zakshub.github.io/wise/schemas/linkedin_draft.schema.json",
+  "title": "LinkedIn Draft",
+  "allOf": [
+    { "$ref": "common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "type": { "const": "linkedin_draft" },
+        "brief_id": { "type": "string", "minLength": 1 },
+        "content_text": { "type": "string", "minLength": 1 },
+        "claim_to_source_map": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "claim_text": { "type": "string" },
+              "source_ids": { "type": "array", "items": { "type": "string" } },
+              "evidence_level": { "type": "string", "enum": ["A", "B", "C", "D"] },
+              "is_supported": { "type": "boolean" }
+            },
+            "required": ["claim_text", "source_ids", "evidence_level", "is_supported"]
+          }
+        },
+        "risk_flags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["unsupported_claim", "named_employer_threshold", "missing_context", "single_source", "legal_sensitivity", "personal_data"] },
+              "description": { "type": "string" },
+              "severity": { "type": "string", "enum": ["low", "medium", "high", "blocking"] }
+            },
+            "required": ["type", "description", "severity"]
+          }
+        },
+        "validation_status": { "type": "string", "enum": ["pending", "passed", "failed"] },
+        "owner_decision": { "type": "string", "enum": ["pending", "approved", "rejected", "needs_revision"] },
+        "owner_notes": { "type": ["string", "null"] }
+      },
+      "required": ["brief_id", "content_text", "claim_to_source_map", "risk_flags", "validation_status", "owner_decision"],
+      "additionalProperties": false
+    }
+  ]
+}

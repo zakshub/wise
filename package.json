@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/api/server.ts",
-    "build": "tsc --noEmit",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "tsc --noEmit && cd frontend && npm run build",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src --ext .ts",
     "db:migrate": "tsx src/db/migrate.ts",
     "db:seed": "tsx src/db/seed.ts",
-    "cli": "tsx src/cli/index.ts"
+    "cli": "tsx src/cli/index.ts",
+    "frontend:install": "cd frontend && npm install"
   },
   "dependencies": {
     "@types/commander": "^2.12.0",
